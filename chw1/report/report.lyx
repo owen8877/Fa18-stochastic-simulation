@@ -1,0 +1,3407 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{url}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\float_placement tbph
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 3cm
+\topmargin 3cm
+\rightmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Coding Homework 1 (Ising model)
+\end_layout
+
+\begin_layout Author
+Ziheng Chen 1500010632
+\end_layout
+
+\begin_layout Part
+Ising Model
+\end_layout
+
+\begin_layout Standard
+Ising model is per se a simple model of interacting magnetic spins.
+ To efficiently compute properties of the thermodynamic system, we need
+ to generate a Markov chain that conforms the distribution of
+\begin_inset Formula 
+\[
+\pi\left(\sigma\right)\triangleq\frac{1}{Z_{\beta}}e^{-\beta\cdot H\left(\sigma\right)}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $Z_{\beta}$
+\end_inset
+
+ is the partition function.
+\end_layout
+
+\begin_layout Standard
+We implemented the MCMC algorithm via C++, which can provide great performance
+ while offer large flexibility.
+ The speedtest test script is at 
+\family typewriter
+/src/speedTest.m
+\family default
+.
+ Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:speed"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ shows a typical duration used.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+N(2D)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+time used(s)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+30
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+29.82
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+35
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+33.07
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+40
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+36.73
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset space \hspace{}
+\length 15page%
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+N(3D)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+time used(s)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+96.50
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+12
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+146.32
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+211.04
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Time used to perform 
+\begin_inset Formula $10^{8}$
+\end_inset
+
+ iterations.
+ 
+\begin_inset Formula $\beta$
+\end_inset
+
+ is set to the corresponding critical 
+\begin_inset Formula $\beta_{c}$
+\end_inset
+
+.
+ All tests are performed on one single core @3.3GHz.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:speed"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Symbols used
+\end_layout
+
+\begin_layout Itemize
+Hamiltonian 
+\begin_inset Formula $H$
+\end_inset
+
+ :
+\begin_inset Formula 
+\[
+H\left(\sigma\right)\triangleq-J\sum_{\left\langle i,j\right\rangle }\sigma_{i}\sigma_{j}-h\sum_{i}\sigma_{i}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Internal energy 
+\begin_inset Formula $U$
+\end_inset
+
+ :
+\begin_inset Formula 
+\begin{align*}
+U & \triangleq\left\langle H\left(\sigma\right)\right\rangle =-\dfrac{\partial\ln Z}{\partial\beta},\\
+u & \triangleq\frac{U}{N^{d}}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Specific heat 
+\begin_inset Formula $C$
+\end_inset
+
+ :
+\begin_inset Formula 
+\begin{align*}
+C & \triangleq\dfrac{\partial U}{\partial T}=\beta^{2}\cdot\text{Var}H\left(\sigma\right),\\
+c & \triangleq\frac{C}{N^{d}}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Magnetization 
+\begin_inset Formula $M$
+\end_inset
+
+ :
+\begin_inset Formula 
+\begin{align*}
+M & \triangleq\left\langle \sum_{i}\sigma_{i}\right\rangle ,\\
+m & \triangleq\frac{M}{N^{d}}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Magnetic susceptibility 
+\begin_inset Formula $X$
+\end_inset
+
+ :
+\begin_inset Formula 
+\begin{align*}
+X & \triangleq\dfrac{\partial M}{\partial h}=\beta\cdot\text{Var}M,\\
+\chi & \triangleq\frac{X}{N^{d}}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Part
+2D case
+\end_layout
+
+\begin_layout Section
+Auto-correlation time
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Auto-correlation-time"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A first question is to make sure that each consecutive sample of 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ is uncorrelated with each other, which is impossible to determine directly
+ because 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ lies in a space with such a huge dimension; one pratical way is to examine
+ the effect of any continuous function applied on 
+\begin_inset Formula $\sigma$
+\end_inset
+
+, such as 
+\begin_inset Formula $H\left(\sigma\right)$
+\end_inset
+
+ or 
+\begin_inset Formula $m\left(\sigma\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Here we take an example when 
+\begin_inset Formula $N=30$
+\end_inset
+
+, as is shown in Fig 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:p2_s1_act"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ The samples will get more correlated when 
+\begin_inset Formula $T$
+\end_inset
+
+ gets closer to the critical temperature, as the red line (
+\begin_inset Formula $\beta=0.435$
+\end_inset
+
+) is much relaxed compared to the blue or yellow line (
+\begin_inset Formula $\beta=0.48,0.4$
+\end_inset
+
+).
+ So in general case, it is proper to skip a number of samples like 10000
+ when the temperature is far from the critical, but that is not enough when
+ we are near the phase transition.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename plot/p2_s1_act.epsc
+	width 60line%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Auto-correlation in relation to jump interval 
+\begin_inset Formula $\Delta t=0,1,2\dots$
+\end_inset
+
+.
+ Each jump skips 10000 consecutive samples.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:p2_s1_act"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Besides, smaller systems (
+\begin_inset Formula $N<30$
+\end_inset
+
+) have smaller auto-correlation time, whereas larger systems are much more
+ `resistent' and require a much bigger number to skip in order to get uncorrelat
+ed samples.
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Critical Temperature
+\end_layout
+
+\begin_layout Standard
+First we will look at if there is a phase transition in 
+\begin_inset Formula $u\left(T\right)\triangleq\frac{1}{N^{2}}\left\langle H\left(\sigma\right)\right\rangle $
+\end_inset
+
+.
+ The result is shown in Fig 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:p2_s2_inner_energy"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename plot/p2_s2_inner_energy.epsc
+	width 50line%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Unit inner energy 
+\begin_inset Formula $u\left(T\right)$
+\end_inset
+
+.
+ Note that there is a steep raise near 
+\begin_inset Formula $T\approx2.3$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:p2_s2_inner_energy"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It seems unclear where the transition is (and more fundamental, whether
+ there is a transition).
+ To address these questions, we have to plot out the specific heat 
+\begin_inset Formula $c\left(T\right)$
+\end_inset
+
+; see Fig 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:p2_s2_critical_heat"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename plot/p2_s2_specific_heat.epsc
+	width 80line%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Unit specific heat 
+\begin_inset Formula $c\left(T\right)$
+\end_inset
+
+.
+ Inset: A closer look at the possible transition temperature.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:p2_s2_critical_heat"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The inset in Fig 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:p2_s2_critical_heat"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ clearly indicates the transition point (if we ignore the numerical difficulties
+ in low temperatures temporarily).
+ To further accurately find the critical point, we first fit each 
+\begin_inset Formula $c\left(T\right)$
+\end_inset
+
+ curve in the peak area by a quadratic function; then we extrapolate the
+ approximate critical temperature 
+\begin_inset Formula $T_{C}\left(N\right)$
+\end_inset
+
+ by letting 
+\begin_inset Formula $\frac{1}{N}\to0$
+\end_inset
+
+.
+ In Fig 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:p2_s2_fit"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ we draw the conclusion that a fine approximation is 
+\begin_inset Formula $T_{C}=2.2783$
+\end_inset
+
+.
+ We also use this approximation in the following analysis.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename plot/p2_s2_fit.epsc
+	width 60line%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Extrapolation to obtain the critical point.
+ The intercept in the left plot is 
+\begin_inset Formula $T_{C}=2.2783$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:p2_s2_fit"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Characteristic Length
+\end_layout
+
+\begin_layout Standard
+In Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Auto-correlation-time"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ we discussed the time correlation; it is also interesting to see if the
+ model has a phase transition in terms of spatial correlation.
+\end_layout
+
+\begin_layout Standard
+To visually illustrate the spatial correlation, we take the `screenshot'
+ of the system at different temperatures, shown in Fig 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:p2-s4-conf"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ It is quite clear that the system is out of order at high temperatures,
+ but starts to organize near the critical point, and becomes very orderly
+ at low temperatures.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename plot/2d-ising-conf.png
+	width 80line%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Different configurations at different temperatures.
+ System size: 
+\begin_inset Formula $N=50$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:p2-s4-conf"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The spatial correlation function
+\begin_inset Formula 
+\[
+\Gamma\left(r\right)\triangleq\left\langle \rho\left(0\right)\rho\left(r\right)\right\rangle ,r\in\mathbb{R}^{2}
+\]
+
+\end_inset
+
+is plotted out in Fig 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:p2-s4-corr-beta-0.44"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ Although the system is discretized in a square-lattice manner, the spatial
+ correlation does behave in a radial manner, so it would be easier to investigat
+e 
+\begin_inset Formula $\Gamma\left(\left|r\right|\right)$
+\end_inset
+
+ rather than 
+\begin_inset Formula $\Gamma\left(\overrightarrow{r}\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename plot/p2-s4-corr-beta-0.44.epsc
+	width 70line%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Spatial correlation with peak in the middle.
+ Notice that near the critical temperature the system is more or less correlated
+ in a whole.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:p2-s4-corr-beta-0.44"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For different 
+\begin_inset Formula $\beta$
+\end_inset
+
+-s, we plot the correlation in Fig 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:p2-s4-corr"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ It is obvious that the higher the temperature, the more correlated the
+ system is; and the correlation function behaviors in an exponential decay
+ manner, i.e.
+ 
+\begin_inset Formula $\Gamma\left(r\right)\sim\exp\left(-\frac{r}{\xi}\right)$
+\end_inset
+
+.
+ To obtain a convicing 
+\begin_inset Formula $\xi$
+\end_inset
+
+, we perform least squared fitting and solve 
+\begin_inset Formula $\xi$
+\end_inset
+
+ to minimize the loss.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename plot/p2-s4-correlation.epsc
+	width 60line%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Spatial correlation respecting to 
+\begin_inset Formula $\left|r\right|$
+\end_inset
+
+ under different inverse temperatures.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:p2-s4-corr"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As is shown in Fig 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:p2_s4_xi"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, when the temperature is sufficiently low, the fitted spatial correlation
+ will extend far outside the system.
+ In the right figure we fitted 
+\begin_inset Formula $\xi$
+\end_inset
+
+ and 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ to investigate the limiting behavior; the numeric result is 
+\begin_inset Formula 
+\begin{equation}
+\xi\sim O\left(\epsilon^{-\delta}\right),\delta=0.5785.\label{eq:p2-s4-xi}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename plot/p2_s4_xi.epsc
+	width 100line%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Left figure: characteristic length 
+\begin_inset Formula $\xi$
+\end_inset
+
+ increases as the system freezes.
+ Right figure: limiting behavior of characteristic length in log scale;
+ the fitting line is 
+\begin_inset Formula $\log\xi=-0.5785\cdot\log\epsilon-0.3933$
+\end_inset
+
+, which implies that 
+\begin_inset Formula $\xi\sim O\left(\epsilon^{-0.5785}\right)$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:p2_s4_xi"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+However, as is pointed out in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wiki:corr-function"
+literal "false"
+
+\end_inset
+
+, the relation between correlation and radius is much more complicated.
+ We will leave that for further investigation.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Limiting behaviour
+\end_layout
+
+\begin_layout Standard
+Phase transition also happens in 
+\begin_inset Formula $m,c$
+\end_inset
+
+ and 
+\begin_inset Formula $\chi$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Magnetization per site 
+\begin_inset Formula $m$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A first investigation is carried out on 
+\begin_inset Formula $m$
+\end_inset
+
+ and 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ (
+\begin_inset Formula $T<T_{c}$
+\end_inset
+
+).
+ As is shown in the middle figure in Fig 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:p2-s5-m"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, the relation is quite linear, i.e.
+\begin_inset Formula 
+\begin{equation}
+m\sim O\left(\epsilon^{\alpha}\right),\alpha=0.1108\label{eq:p2-s5-m-1}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\epsilon\ll1$
+\end_inset
+
+, but it is no longer the case when 
+\begin_inset Formula $\epsilon\sim O\left(1\right)$
+\end_inset
+
+.
+ To address the divergence, we fit 
+\begin_inset Formula $\log m$
+\end_inset
+
+ with 
+\begin_inset Formula $\beta$
+\end_inset
+
+ where 
+\begin_inset Formula $0<1-\beta\ll1-\beta_{c}$
+\end_inset
+
+ in the right figure, resulting in 
+\begin_inset Formula 
+\begin{equation}
+1-m\sim O\left(e^{-\theta\beta}\right),\theta=8.9349.\label{eq:p2-s5-m-2}
+\end{equation}
+
+\end_inset
+
+However, these two results seem inconsistent with each other; we will turn
+ back to this issue in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Discussion"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename plot/p2_s4_m.epsc
+	width 100line%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Left figure: magnetization dramatically decreases as 
+\begin_inset Formula $T$
+\end_inset
+
+ approaches the critical temperature (black dotted line) from the left side.
+ Middle figure: fitted (only for the left-most nine data points, where 
+\begin_inset Formula $0<T_{c}-T\ll1$
+\end_inset
+
+) line 
+\begin_inset Formula $\log m=0.1108\log\epsilon+0.1447$
+\end_inset
+
+, which implies 
+\begin_inset Formula $m\sim O\left(\epsilon^{0.1108}\right)$
+\end_inset
+
+.
+ Right figure: fitted (only for the right-most ten data points, where 
+\begin_inset Formula $0<1-\beta\ll1-\beta_{c}$
+\end_inset
+
+) line 
+\begin_inset Formula $\log\left(1-m\right)=-8.9349\beta+1.6569$
+\end_inset
+
+, which implies that 
+\begin_inset Formula $m\sim O\left(e^{-8.9349\beta}\right)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:p2-s5-m"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Specific heat per site 
+\begin_inset Formula $c$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We put the results in Fig 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:p2-s5-c"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ At high temperature 
+\begin_inset Formula $T>T_{c}$
+\end_inset
+
+, we didn't find a perfect linear relation between any simple transform
+ of 
+\begin_inset Formula $c$
+\end_inset
+
+ and 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+; nevertheless, at least it can be observed that if we were to fit 
+\begin_inset Formula $c\sim O\left(\epsilon^{-\gamma}\right)$
+\end_inset
+
+, 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ must be small (as the curve becomes much flatter when 
+\begin_inset Formula $\epsilon\to0$
+\end_inset
+
+).
+ However, this relation is quite clear at low temperature 
+\begin_inset Formula $T_{c}>T$
+\end_inset
+
+, where the fitted line suggests that 
+\begin_inset Formula $c\sim O\left(\log\epsilon\right)$
+\end_inset
+
+, which implies that 
+\begin_inset Formula $\gamma=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename plot/p2_s4_c.epsc
+	width 90line%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Left figure: 
+\begin_inset Formula $\log c-\log\epsilon$
+\end_inset
+
+ at 
+\begin_inset Formula $T>T_{c}$
+\end_inset
+
+.
+ Middle figure: 
+\begin_inset Formula $c-\log\epsilon$
+\end_inset
+
+ at 
+\begin_inset Formula $T>T_{c}$
+\end_inset
+
+.
+ Right figure: 
+\begin_inset Formula $c-\log\epsilon$
+\end_inset
+
+ at 
+\begin_inset Formula $T_{c}>T$
+\end_inset
+
+; the fitted line is 
+\begin_inset Formula $c=-0.4712\cdot\log\epsilon-0.2819$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:p2-s5-c"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Magnetic susceptibility per site 
+\begin_inset Formula $\chi$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Both 
+\begin_inset Formula $c$
+\end_inset
+
+ and 
+\begin_inset Formula $\chi$
+\end_inset
+
+ are obtained as a second order information, so they are often less precise
+ than 
+\begin_inset Formula $u$
+\end_inset
+
+ and 
+\begin_inset Formula $m$
+\end_inset
+
+.
+ Nevertheless, we can still investigate if there is a phase transition in
+ 
+\begin_inset Formula $\chi$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In Fig 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:p2-s5-chi"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, there is a clear blow-up near the critical temperature.
+ To further obtain the order, we plot the limiting behavior in the right
+ plot; here we met some numerical difficulties when 
+\begin_inset Formula $\epsilon\ll1$
+\end_inset
+
+.
+ If we only fit the curves according to the most straight part, the asymptotic
+ behavior is 
+\begin_inset Formula 
+\begin{equation}
+\chi\sim O\left(\epsilon^{-\eta}\right),\eta=1.5293.\label{eq:p2-s5-chi}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename plot/p2_s4_chi.epsc
+	width 70line%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Left figure: magnetic susceptibility blows up near the critical temperature.
+ Right figure: the fitted (only for the right-most seven points) line is
+ 
+\begin_inset Formula $\log\chi=-1.5293\cdot\log\epsilon-0.3012$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:p2-s5-chi"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Magnetization and External Magnetic Strength
+\end_layout
+
+\begin_layout Standard
+If 
+\begin_inset Formula $h$
+\end_inset
+
+ is not set to zero, the system can be magnetized in general; as is shown
+ in Fig 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:p2-s6-m-h"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, the interesting part is that for low temperatures, 
+\begin_inset Formula $m\not\to0$
+\end_inset
+
+ when 
+\begin_inset Formula $h\to0$
+\end_inset
+
+.
+ Another thing worth mentioning is that higher temperatures will lead to
+ lower magnetization if given the fixed external field intensity.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename plot/p2_s6_m_h.epsc
+	width 60line%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Magnetization per site 
+\begin_inset Formula $m$
+\end_inset
+
+ in relation with external field intensity 
+\begin_inset Formula $h$
+\end_inset
+
+.
+ Notice that when 
+\begin_inset Formula $\beta>\beta_{c}$
+\end_inset
+
+ the system will have spontaneous magnetization.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:p2-s6-m-h"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Discussion
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Discussion"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+First we will compare our numerical asymptotic orders with theoritical ones
+ in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:p2"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="3cm">
+<column alignment="center" valignment="top" width="3cm">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ours
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Theoretical
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $T_{c}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+2.2783
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.2692
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\alpha$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0.1108
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.125
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset Formula $\delta$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0.5785
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\gamma$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset Formula $\eta$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+1.5293
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.75
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Comparison between numerical and theoretical results on critical exponents.
+ The data is obtained via 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wiki:universality-class"
+literal "false"
+
+\end_inset
+
+ and
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wiki:ising-coeff"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:p2"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Then we will address the inconsistency between the two approximations (Eqn
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:p2-s5-m-1"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:p2-s5-m-2"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ From 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wiki:2d-ising"
+literal "false"
+
+\end_inset
+
+ we know that the theoritical solution is 
+\begin_inset Formula 
+\[
+m^{*}\left(\beta\right)=\left(1-\sinh^{-4}\left(2\beta J\right)\right)^{1/8},
+\]
+
+\end_inset
+
+so at the two different boundaries:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\beta\to\beta_{c}$
+\end_inset
+
+ : by definition of 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ we know that 
+\begin_inset Formula $\beta\approx\beta_{c}\left(1+\epsilon\right)$
+\end_inset
+
+, which leads to
+\begin_inset Formula 
+\begin{align*}
+\log m^{*} & \approx\frac{1}{8}\log\left(1-\left(1+\cosh\left(2\beta_{c}J\right)\cdot\left(2\beta_{c}J\epsilon\right)\right)^{-4}\right)\\
+ & \approx\frac{1}{8}\log\epsilon+\frac{\log\left(8\sqrt{2}\beta_{c}J\right)}{8}.
+\end{align*}
+
+\end_inset
+
+So in this case 
+\begin_inset Formula $m^{*}\sim O\left(\epsilon^{1/8}\right)$
+\end_inset
+
+; our result 
+\begin_inset Formula $\alpha=0.1108$
+\end_inset
+
+ partially matches this.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\beta\to\infty$
+\end_inset
+
+ : by definition of 
+\begin_inset Formula $\sinh$
+\end_inset
+
+ we know that 
+\begin_inset Formula 
+\begin{align*}
+m^{*} & \approx1-\frac{2}{\exp^{4}\left(2\beta J\right)},
+\end{align*}
+
+\end_inset
+
+so 
+\begin_inset Formula $\log\left(1-m^{*}\right)\sim-8\beta$
+\end_inset
+
+; our result 
+\begin_inset Formula $\theta=8.9349$
+\end_inset
+
+ partially matches this.
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Part
+3D case
+\end_layout
+
+\begin_layout Standard
+Here we have a little further exploration into the 3D case.
+\end_layout
+
+\begin_layout Section
+Auto-correlation time
+\end_layout
+
+\begin_layout Standard
+We will again first check the magnitude of the auto-correlation time.
+ For 3D case the system size is much restricted; we will take 
+\begin_inset Formula $N=14$
+\end_inset
+
+ as exmaple, shown in Fig 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:p3_s1_act"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ In general case, it is proper to skip a number of samples like 20000 to
+ get uncorreleated samples.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename plot/p3_s1_act.epsc
+	width 80line%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Auto-correlation in relation to jump interval 
+\begin_inset Formula $\Delta t=0,1,2\dots$
+\end_inset
+
+.
+ Each jump skips 20000 consecutive samples.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:p3_s1_act"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Critical Temperature
+\end_layout
+
+\begin_layout Standard
+First we will look at if there is a phase transition in 
+\begin_inset Formula $u\left(T\right)$
+\end_inset
+
+.
+ The result is shown in Fig 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:p3_s2_inner_energy"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename plot/p3_s2_inner_energy.epsc
+	width 80line%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Unit inner energy 
+\begin_inset Formula $u\left(T\right)$
+\end_inset
+
+.
+ Note that there is a steep raise near 
+\begin_inset Formula $T\approx4.4$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:p3_s2_inner_energy"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It seems unclear where the transition is (and more fundamental, whether
+ there is a transition).
+ To address these questions, we have to plot out the specific heat 
+\begin_inset Formula $c\left(T\right)$
+\end_inset
+
+; see Fig 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:p3_s2_critical_heat"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename plot/p3_s2_specific_heat.epsc
+	width 80line%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Unit specific heat 
+\begin_inset Formula $c\left(T\right)$
+\end_inset
+
+.
+ Inset: A closer look at the possible transition temperature.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:p3_s2_critical_heat"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The inset in Fig 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:p3_s2_critical_heat"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ clearly indicates the transition point; we performed a similar approach
+ as that in the 2D case, which leads to 
+\begin_inset Formula $T_{c}=4.425$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Characteristic Length
+\end_layout
+
+\begin_layout Standard
+Similar to that in 2D case, the correlation grows denser when the temperature
+ goes down, as is shown in Fig 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:p3-s4-corr"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ The relation between 
+\begin_inset Formula $\Gamma\left(\left|r\right|\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\beta$
+\end_inset
+
+ is also plotted in Fig 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:p3-s4-corr-beta-0.226"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename plot/p3-s4-corr-beta-0.226.epsc
+	width 70line%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Spatial correlation with peak in the middle.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:p3-s4-corr"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename plot/p2-s4-correlation.epsc
+	width 60line%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Spatial correlation respecting to 
+\begin_inset Formula $|r|$
+\end_inset
+
+ under different inverse temperatures.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:p3-s4-corr-beta-0.226"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here we will use the same approach to estimate the spatial correlation.
+ As is shown in Fig 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:p3_s4_xi"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, when the temperature is sufficiently low, the fitted spatial correlation
+ will extend far outside the system.
+ In the right figure we fitted 
+\begin_inset Formula $\xi$
+\end_inset
+
+ and 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ to investigate the limiting behavior; the numeric result is 
+\begin_inset Formula 
+\begin{equation}
+\xi\sim O\left(\epsilon^{-\delta}\right),\delta=0.5785.\label{eq:p3-s4-xi}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename plot/p3_s4_xi.epsc
+	width 100line%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Left figure: characteristic length 
+\begin_inset Formula $\xi$
+\end_inset
+
+ increases as the system freezes.
+ Right figure: limiting behavior of characteristic length in log scale;
+ the fitting line is 
+\begin_inset Formula $\log\xi=-0.5785\cdot\log\epsilon-0.3933$
+\end_inset
+
+, which implies that 
+\begin_inset Formula $\xi\sim O\left(\epsilon^{-0.5785}\right)$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:p3_s4_xi"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Limiting behaviour
+\end_layout
+
+\begin_layout Subsection
+Magnetization per site 
+\begin_inset Formula $m$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A first investigation is carried out on 
+\begin_inset Formula $m$
+\end_inset
+
+ and 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ (
+\begin_inset Formula $T<T_{c}$
+\end_inset
+
+).
+ As is shown in the middle figure in Fig 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:p3-s5-m"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, the relation is quite linear, i.e.
+\begin_inset Formula 
+\begin{equation}
+m\sim O\left(\epsilon^{\alpha}\right),\alpha=0.2006\label{eq:p3-s5-m-1}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\epsilon\ll1$
+\end_inset
+
+, but it is no longer the case when 
+\begin_inset Formula $\epsilon\sim O\left(1\right)$
+\end_inset
+
+.
+ Similar to that in 2D case, we fit 
+\begin_inset Formula $\log m$
+\end_inset
+
+ with 
+\begin_inset Formula $\beta$
+\end_inset
+
+ where 
+\begin_inset Formula $0<1-\beta\ll1-\beta_{c}$
+\end_inset
+
+ in the right figure, resulting in 
+\begin_inset Formula 
+\begin{equation}
+1-m\sim O\left(e^{-\theta\beta}\right),\theta=11.4506.\label{eq:p3-s5-m-2}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename plot/p3_s4_m.epsc
+	width 100line%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Left figure: magnetization dramatically decreases as 
+\begin_inset Formula $T$
+\end_inset
+
+ approaches the critical temperature (black dotted line) from the left side.
+ Middle figure: fitted (only for the left-most nine data points, where 
+\begin_inset Formula $0<T_{c}-T\ll1$
+\end_inset
+
+) line 
+\begin_inset Formula $\log m=0.2006\log\epsilon+0.1759$
+\end_inset
+
+.
+ Right figure: fitted (only for the right-most ten data points, where 
+\begin_inset Formula $0<1-\beta\ll1-\beta_{c}$
+\end_inset
+
+) line 
+\begin_inset Formula $\log\left(1-m\right)=-11.4506\beta+0.3263$
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:p3-s5-m"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Specific heat per site 
+\begin_inset Formula $c$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We put the results in Fig 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:p3-s5-c"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ At high temperatures (the upper two figures), 
+\begin_inset Formula $\log c$
+\end_inset
+
+ shows a linear relation with 
+\begin_inset Formula $\log\epsilon$
+\end_inset
+
+ rather than with 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+, indicating that 
+\begin_inset Formula 
+\begin{equation}
+c\sim O\left(\epsilon^{-\gamma_{1}}\right),\gamma_{1}=0.8803.\label{eq:p3-s5-c-1}
+\end{equation}
+
+\end_inset
+
+However, at low temperatures, 
+\begin_inset Formula $\log c$
+\end_inset
+
+ seems not in a linear relation with 
+\begin_inset Formula $\log\epsilon$
+\end_inset
+
+; instead, the right-bottom figure indicates that 
+\begin_inset Formula 
+\begin{equation}
+c\sim O\left(-\gamma_{2}\log\epsilon\right),\gamma_{2}=0.5939.\label{eq:p3-s5-c-2}
+\end{equation}
+
+\end_inset
+
+We will further discuss the issue in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Discussion-3d"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename plot/p3_s4_c.epsc
+	width 100line%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Top two figures: 
+\begin_inset Formula $T>T_{c}$
+\end_inset
+
+; fit for the left-top figure: 
+\begin_inset Formula $\log c=-0.8803\log\epsilon-3.0039$
+\end_inset
+
+.
+ Bottom two figures: 
+\begin_inset Formula $T_{c}>T$
+\end_inset
+
+; fit for the right-bottom figure: 
+\begin_inset Formula $c=-0.5939\log\epsilon-0.2074$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:p3-s5-c"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Magnetic susceptibility per site 
+\begin_inset Formula $\chi$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Again, as is shown in Fig 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:p3-s5-chi"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, there is a clear blow-up near the critical temperature.
+ If we only fit the curves in the right figure according to the most straight
+ part, the asymptotic behavior is 
+\begin_inset Formula 
+\begin{equation}
+\chi\sim O\left(\epsilon^{-\eta}\right),\eta=1.2070.\label{eq:p3-s5-chi}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename plot/p3_s4_chi.epsc
+	width 100line%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Left figure: magnetic susceptibility blows up near the critical temperature.
+ Right figure: the fitted (only for the right-most seven points) line is
+ 
+\begin_inset Formula $\log\chi=-1.2070\cdot\log\epsilon-1.1522$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:p3-s5-chi"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Discussion
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Discussion-3d"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Our numerical asymptotic orders are compared with empirical ones in Table
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:p3"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="3cm">
+<column alignment="center" valignment="top" width="3cm">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ours
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Empirical
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $T_{c}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+4.425
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.52
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\alpha$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0.2006
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.3264
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset Formula $\delta$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0.5785
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.6300
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\gamma$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0/0.
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+8803
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.1101
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset Formula $\eta$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.2070
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.2371
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Comparison between numerical and theoretical results on critical exponents.
+ For 3D critical temperature, see 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ghaemi2001calculation"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:p3"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It is very interesting that specific heat relies on 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ in different ways depending on the approaching direction.
+ From the high temperature the order is zero while it is clearly non-zero
+ from the low temperature, which is worth further investigation.
+\end_layout
+
+\begin_layout Part*
+Reference
+\end_layout
+
+\begin_layout Standard
+\align left
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+btprint "btPrintCited"
+bibfiles "ref"
+options "abbrv"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
