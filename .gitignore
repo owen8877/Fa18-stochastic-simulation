@@ -3,3 +3,6 @@
 *.mat*
 *.dump*
 *.pdf
+*.epsc
+
+chw1/src/main

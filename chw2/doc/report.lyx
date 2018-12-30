@@ -1,0 +1,1118 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\begin_modules
+theorems-ams
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\float_placement h
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 3cm
+\topmargin 3cm
+\rightmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Coding Homework 2 (Random Matrix Theory)
+\end_layout
+
+\begin_layout Author
+Ziheng Chen
+\end_layout
+
+\begin_layout Abstract
+In this report, we will study the spectral property of several random matrices
+ through numerical experiments and analytical derivation.
+\end_layout
+
+\begin_layout Section
+GOE and GUE
+\end_layout
+
+\begin_layout Standard
+In this part, we will first go through the definition and properties of
+ GOE/GUE-s, followed by numerical and extended results.
+\end_layout
+
+\begin_layout Subsection
+Definition
+\end_layout
+
+\begin_layout Definition
+The 
+\begin_inset Quotes eld
+\end_inset
+
+Gaussian Orthogonal Ensemble
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $\mathbf{GOE}\left(N\right)$
+\end_inset
+
+ is composed by all symmetric matrices 
+\begin_inset Formula $H\in\mathbb{R}^{N\times N}$
+\end_inset
+
+, of which the upper-triangle entries are independent and satisfy
+\end_layout
+
+\begin_layout Definition
+\begin_inset Formula 
+\[
+H_{jk}\sim\begin{cases}
+N\left(0,1\right) & j\neq k\\
+N\left(0,2\right) & j=k
+\end{cases}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition
+The 
+\begin_inset Quotes eld
+\end_inset
+
+Gaussian Unitary Ensemble
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $\mathbf{GUE}\left(N\right)$
+\end_inset
+
+ is composed by all Hermitian matrices 
+\begin_inset Formula $H\in\mathbb{C}^{N\times N}$
+\end_inset
+
+, of which the upper-triangle entries are independent and satisfy
+\end_layout
+
+\begin_layout Definition
+\begin_inset Formula 
+\[
+H_{jk}\sim\begin{cases}
+N\left(0,\frac{1}{2}\right)+i\cdot N\left(0,\frac{1}{2}\right) & j\neq k\\
+N\left(0,1\right) & j=k
+\end{cases}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Probability density
+\end_layout
+
+\begin_layout Lemma
+The probability density 
+\begin_inset Formula $\rho_{O}\left(H\right)$
+\end_inset
+
+ is given by
+\begin_inset Formula 
+\begin{align}
+\rho_{O}\left(H\right) & =\prod_{i=1}^{N}\frac{1}{\sqrt{4\pi}}e^{-\frac{H_{ii}^{2}}{4}}\cdot\prod_{i<j}\frac{1}{\sqrt{2\pi}}e^{-\frac{H_{ij}^{2}}{2}}=\varrho_{O}\left(N\right)\cdot e^{-\frac{1}{4}\left\Vert H\right\Vert _{F}^{2}}\label{eq:rho-H_GOE}
+\end{align}
+
+\end_inset
+
+where 
+\begin_inset Formula $\varrho_{O}\left(N\right)=2^{-\frac{N^{2}+3N}{4}}\cdot\pi^{-\frac{N^{2}+N}{4}}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+A similar conclusion can be derived for 
+\begin_inset Formula $\mathbf{GUE}\left(N\right)$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Lemma
+The probability density 
+\begin_inset Formula $\rho_{U}\left(H\right)$
+\end_inset
+
+ is given by
+\begin_inset Formula 
+\begin{align}
+\rho_{U}\left(H\right) & =\prod_{i=1}^{N}\frac{1}{\sqrt{2\pi}}e^{-\frac{H_{ii}^{2}}{2}}\cdot\prod_{i<j}\frac{1}{\pi}e^{-\left|H_{ij}\right|^{2}}=\varrho_{U}\left(N\right)\cdot e^{-\frac{1}{2}\left\Vert H\right\Vert _{F}^{2}}\label{eq:rho-H_GUE}
+\end{align}
+
+\end_inset
+
+where 
+\begin_inset Formula $\varrho_{O}\left(N\right)=2^{-\frac{N}{2}}\cdot\pi^{-\frac{N^{2}}{2}}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proposition
+The density 
+\begin_inset Formula $\rho_{O}\left(H\right)$
+\end_inset
+
+(or 
+\begin_inset Formula $\rho_{U}\left(H\right)$
+\end_inset
+
+) is invariant under orthogonal(or correspondingly unitary) transforms.
+\end_layout
+
+\begin_layout Proof
+In fact, the proposition is straightforward since if we replace 
+\begin_inset Formula $H$
+\end_inset
+
+ with 
+\begin_inset Formula $Q^{T}HQ$
+\end_inset
+
+ in Eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:rho-H_GOE"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ (or with 
+\begin_inset Formula $U^{*}HU$
+\end_inset
+
+ in Eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:rho-H_GUE"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+)
+\begin_inset Formula 
+\[
+\Vert Q^{T}HQ\Vert_{F}^{2}=\boldsymbol{tr}\left(Q^{T}H^{T}QQ^{T}HQ\right)=\boldsymbol{tr}\left(QQ^{T}H^{T}H\right)=\left\Vert H\right\Vert _{F}^{2},
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\Vert U^{*}HU\Vert_{F}^{2}=\boldsymbol{tr}\left(U^{*}H^{*}UU^{*}HU\right)=\boldsymbol{tr}\left(UU^{*}H^{*}H\right)=\left\Vert H\right\Vert _{F}^{2}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Gap of eigenvalues
+\end_layout
+
+\begin_layout Standard
+Since 
+\begin_inset Formula $H\in\mathbf{GOE}\left(N\right)$
+\end_inset
+
+ is symmetric, it can be decomposed into
+\begin_inset Formula 
+\[
+H=Q\Lambda Q^{T}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\Lambda=\text{diag}\left(\lambda_{1},\dots\lambda_{N}\right)$
+\end_inset
+
+ is diagonal, 
+\begin_inset Formula $Q$
+\end_inset
+
+ orthogonal.
+ Since 
+\begin_inset Formula $Q\in O^{N\times N}$
+\end_inset
+
+, it only has 
+\begin_inset Formula $N^{2}-N$
+\end_inset
+
+ degrees of freedom, so there exist 
+\begin_inset Formula $N^{2}-N$
+\end_inset
+
+ variables 
+\begin_inset Formula $R\triangleq\left(r_{1},\dots r_{N^{2}-N}\right)$
+\end_inset
+
+ that determine 
+\begin_inset Formula $Q$
+\end_inset
+
+ locally.
+ According to 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "liu2000statistical"
+literal "false"
+
+\end_inset
+
+, the Jacobian of the transform from 
+\begin_inset Formula $H$
+\end_inset
+
+ to 
+\begin_inset Formula $\Lambda$
+\end_inset
+
+ follows:
+\begin_inset Formula 
+\begin{equation}
+J=\prod_{i<j}\left(\lambda_{i}-\lambda_{j}\right)\cdot g\left(r_{1},\dots r_{N^{2}-N}\right).\label{eq:GOE-J}
+\end{equation}
+
+\end_inset
+
+Plugging Eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:GOE-J"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ to the measurement transformation:
+\begin_inset Formula 
+\[
+\rho_{O}\left(H\right)dH=\left|J\right|^{-1}\rho_{O}\left(\Lambda\right)dR\cdot d\Lambda
+\]
+
+\end_inset
+
+which implies
+\begin_inset Formula 
+\begin{align*}
+\rho_{O}\left(\Lambda\right) & =\int_{R}\rho_{O}\left(H\right)\cdot\left|J\right|dR\\
+ & =C\varrho_{O}\left(N\right)\cdot e^{-\frac{1}{4}\left\Vert H\right\Vert _{F}^{2}}\cdot\prod_{i<j}\left(\lambda_{i}-\lambda_{j}\right)\\
+ & =\widetilde{C}\left(N\right)\cdot e^{-\frac{1}{4}\sum_{i}\lambda_{i}^{2}}\cdot\prod_{i<j}\left(\lambda_{i}-\lambda_{j}\right).
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proposition
+\begin_inset CommandInset label
+LatexCommand label
+name "prop:rho_O"
+
+\end_inset
+
+The density of eigenvalues 
+\begin_inset Formula $\rho_{O}\left(\Lambda\right)$
+\end_inset
+
+ is proportional to 
+\begin_inset Formula $e^{-\frac{1}{4}\sum_{i}\lambda_{i}^{2}}\cdot\prod_{i<j}\left(\lambda_{i}-\lambda_{j}\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In general, the formula above is quite hard to compute analytically.
+ However, the 
+\begin_inset Formula $N=2$
+\end_inset
+
+ case can reveal some interesting insight.
+\end_layout
+
+\begin_layout Fact
+\begin_inset CommandInset label
+LatexCommand label
+name "fact:eig_O"
+
+\end_inset
+
+For 
+\begin_inset Formula $N=2,\mathbf{GOE}\left(N\right)$
+\end_inset
+
+ case, 
+\begin_inset Formula $\frac{1}{4}\left|\lambda_{1}-\lambda_{2}\right|^{2}\sim\chi^{2}\left(2\right).$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Since 
+\begin_inset Formula $H\in\mathbf{GOE}\left(N\right)$
+\end_inset
+
+ can be written as 
+\begin_inset Formula $\left(\begin{array}{cc}
+\sqrt{2}z_{1} & z_{2}\\
+z_{2} & \sqrt{2}z_{3}
+\end{array}\right)$
+\end_inset
+
+, a direct computation gives
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula 
+\begin{align*}
+\left|\lambda_{1}-\lambda_{2}\right|^{2} & =\left(\lambda_{1}+\lambda_{2}\right)^{2}-4\lambda_{1}\lambda_{2}\\
+ & =2\left(z_{1}-z_{3}\right)^{2}+4z_{2}^{2}\\
+ & =4\left(y^{2}+z_{2}^{2}\right),
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $y=\frac{1}{\sqrt{2}}\left(z_{1}-z_{3}\right)\sim N\left(0,1\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Since 
+\begin_inset Formula $H\in\mathbf{GUE}\left(N\right)$
+\end_inset
+
+ can only have real eigenvalues, Prop.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "prop:rho_O"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ still holds except a modification on the order:
+\end_layout
+
+\begin_layout Proposition
+\begin_inset CommandInset label
+LatexCommand label
+name "prop:rho_U"
+
+\end_inset
+
+The density of eigenvalues 
+\begin_inset Formula $\rho_{U}\left(\Lambda\right)$
+\end_inset
+
+ is proportional to 
+\begin_inset Formula $e^{-\frac{1}{2}\sum_{i}\lambda_{i}^{2}}\cdot\prod_{i<j}\left(\lambda_{i}-\lambda_{j}\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The distribution of the gaps between eigenvalue can also be given in special
+ cases.
+\end_layout
+
+\begin_layout Fact
+\begin_inset CommandInset label
+LatexCommand label
+name "fact:eig_U"
+
+\end_inset
+
+For 
+\begin_inset Formula $N=2,\mathbf{GUE}\left(N\right)$
+\end_inset
+
+ case, 
+\begin_inset Formula $\frac{1}{2}\left|\lambda_{1}-\lambda_{2}\right|^{2}\sim\chi^{2}\left(3\right).$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Since 
+\begin_inset Formula $H\in\mathbf{GUE}\left(N\right)$
+\end_inset
+
+ can be written as 
+\begin_inset Formula $\left(\begin{array}{cc}
+w_{1} & \frac{1}{\sqrt{2}}\left(w_{2}+iw_{3}\right)\\
+\frac{1}{\sqrt{2}}\left(w_{2}-iw_{3}\right) & w_{4}
+\end{array}\right)$
+\end_inset
+
+, a direct computation gives
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula 
+\begin{align*}
+\left|\lambda_{1}-\lambda_{2}\right|^{2} & =\left(\lambda_{1}+\lambda_{2}\right)^{2}-4\lambda_{1}\lambda_{2}\\
+ & =\left(w_{1}-w_{4}\right)^{2}+2\left(w_{2}^{2}+w_{3}^{2}\right)\\
+ & =2\left(v^{2}+w_{2}^{2}+w_{3}^{2}\right),
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $v=\frac{1}{\sqrt{2}}\left(w_{1}-w_{4}\right)\sim N\left(0,1\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Numerical Experiments
+\end_layout
+
+\begin_layout Standard
+With the help of computers, we can explore further into 
+\begin_inset Formula $N\ge3$
+\end_inset
+
+ cases.
+ First we verify Fact.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fact:eig_O"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fact:eig_U"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ by generating many independent matrices and compute the gap between eigenvalues.
+\end_layout
+
+\begin_layout Standard
+In the following experiments, we generated 10000 matrices per trial, and
+ ran in total 10 trials for each parameter setting to cross compare the
+ distribution results.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename plot/GOE.epsc
+	width 100line%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Distribution of the gaps for 
+\begin_inset Formula $\mathbf{GOE}\left(N\right)$
+\end_inset
+
+.
+ Left figure: original scale; right figure: normalized scale so that the
+ empirical expectation is also 1.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:GOE"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename plot/GUE.epsc
+	width 100line%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Distribution of the gaps for 
+\begin_inset Formula $\mathbf{GUE}\left(N\right)$
+\end_inset
+
+.
+ Left figure: original scale; right figure: normalized scale so that the
+ empirical expectation is also 1.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:GUE"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As is shown in Fig.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:GOE"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:GUE"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, not only the numerical results match the theoretical predictions, but
+ also they reveal some interesting facts.
+ As 
+\begin_inset Formula $N\to\infty$
+\end_inset
+
+, the expectation of 
+\begin_inset Formula $|\lambda_{n}-\lambda_{n-1}|$
+\end_inset
+
+ will shrink, but the normalized distribution stays almost the same, regardless
+ to 
+\begin_inset Formula $N$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Real Wigner Matrices
+\end_layout
+
+\begin_layout Standard
+Now we turn to real Wigner matrices with the following properties: 
+\begin_inset Formula $X\in\mathbb{R}^{N\times N},X=X^{T}$
+\end_inset
+
+, and for 
+\begin_inset Formula $i<j$
+\end_inset
+
+, 
+\begin_inset Formula $X_{ij}\sim N\left(0,1\right)$
+\end_inset
+
+ independently.
+ The reason we dismiss the complex case is simple: it coincides with 
+\begin_inset Formula $\mathbf{GUE}\left(N\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Gaps of eigenvalues
+\end_layout
+
+\begin_layout Standard
+Like Fact.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fact:eig_O"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fact:eig_U"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, we can also calculate the distribution when 
+\begin_inset Formula $N=2$
+\end_inset
+
+, but that turns out to be much harder; in fact, given 
+\begin_inset Formula $X=\left(\begin{array}{cc}
+x_{1} & x_{2}\\
+x_{2} & x_{3}
+\end{array}\right)$
+\end_inset
+
+, the gap is given by
+\begin_inset Formula 
+\begin{align}
+\left|\lambda_{1}-\lambda_{2}\right| & ^{2}=\left(x_{1}-x_{3}\right)^{2}+4x_{2}^{2}\nonumber \\
+ & =2\widetilde{x}^{2}+4x_{2}^{2},\label{eq:rW}
+\end{align}
+
+\end_inset
+
+where 
+\begin_inset Formula $\widetilde{x}=\frac{1}{\sqrt{2}}\left(x_{1}-x_{3}\right)\sim N\left(0,1\right)$
+\end_inset
+
+.
+ The distribution given by Eqn.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:rW"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ is quite hard to solve, so it would actually be efficient to check that
+ numerically.
+\end_layout
+
+\begin_layout Standard
+Here we repeat the procedures and plot out the distributions:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename plot/rW.epsc
+	width 100line%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Distribution of the gaps for real Wigner matrices of size 
+\begin_inset Formula $N\times N$
+\end_inset
+
+.
+ Left figure: original scale; right figure: normalized scale so that the
+ empirical expectation is also 1.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:rW"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To further compare these three types of matrices, we choose the curves correspon
+ding to 
+\begin_inset Formula $N=10$
+\end_inset
+
+ case in Fig.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:three"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ It is actually surprising that the GOE curve and that in real Wigner case
+ does collide.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename plot/three.epsc
+	width 80line%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Comparison between the distribution of gaps in different martix types.
+ 
+\begin_inset Formula $N=10$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:three"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Distribution of eigenvalues
+\end_layout
+
+\begin_layout Standard
+From orthogonal/unitary tranforms, we know that for these three types of
+ matrices mentioned above
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{1}{N^{2}}\sum_{\lambda\in\lambda\left(H\right)}\lambda^{2}=\frac{1}{N^{2}}\boldsymbol{tr}\left(H^{*}H\right)=\frac{1}{N^{2}}\left\Vert H\right\Vert _{F}^{2},
+\]
+
+\end_inset
+
+which implies, due to the weak law of large numbers,
+\begin_inset Formula 
+\[
+\mathbb{E}\overline{\left(\frac{\lambda}{\sqrt{N}}\right)^{2}}=O\left(1\right),\lambda\in\lambda\left(H\right).
+\]
+
+\end_inset
+
+On the other hand,
+\begin_inset Formula 
+\[
+\frac{1}{N}\sum_{\lambda\in\lambda\left(H\right)}\lambda=\frac{1}{N}\boldsymbol{tr}\left(H\right),
+\]
+
+\end_inset
+
+so 
+\begin_inset Formula $\mathbb{E}\overline{\lambda}=0$
+\end_inset
+
+, which means we don't have to translate the eigenvalues and only scaling
+ is needed.
+ Based on this observation, we seek to find the distribution of 
+\begin_inset Formula $\frac{\lambda}{\sqrt{N}}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename plot/semi-circle.epsc
+	width 80line%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Distribution of 
+\begin_inset Formula $\frac{\lambda}{\sqrt{N}}$
+\end_inset
+
+ for different matrices types.
+ 
+\begin_inset Formula $N=10$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:semi-circle-law"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As is shown in Fig.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:semi-circle-law"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, the distribution looks quite similar to 
+\begin_inset Formula 
+\[
+p_{s}\left(x\right)\triangleq\frac{1}{2\pi}\sqrt{4-x^{2}}\cdot\boldsymbol{1}_{\left|x\right|<2},
+\]
+
+\end_inset
+
+which is not surprising since this is actually the Wigner's Semicircle Law.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+btprint "btPrintCited"
+bibfiles "ref"
+options "apalike"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
